@@ -8,6 +8,7 @@ URL:		http://pragha.wikispaces.com/
 # VCS: git:https://github.com/matiasdelellis/pragha.git
 Source0:	https://github.com/downloads/matiasdelellis/pragha/%{name}-%{version}.tar.bz2
 # Source0-md5:	f6ac43773a88d16c51201cedce812b4a
+Patch0:		libcdio-paranoia.patch
 BuildRequires:	curl-devel >= 7.18
 BuildRequires:	dbus-devel >= 1.1
 BuildRequires:	dbus-glib-devel >= 0.84
@@ -21,6 +22,7 @@ BuildRequires:	gtk+2-devel >= 2.20.0
 BuildRequires:	keybinder-devel >= 0.2.0
 BuildRequires:	libcddb-devel >= 1.3.0
 BuildRequires:	libcdio-devel >= 0.80
+BuildRequires:	libcdio-paranoia-devel
 BuildRequires:	libclastfm-devel >= 0.5
 BuildRequires:	libnotify-devel >= 0.4.4
 BuildRequires:	libxfce4ui-devel >= 4.8.0
@@ -42,6 +44,7 @@ original author.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %configure
