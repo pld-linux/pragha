@@ -8,7 +8,7 @@ Summary:	Lightweight GTK+ music manager
 Summary(pl.UTF-8):	Lekki zarządca muzyki oparty na GTK+
 Name:		pragha
 Version:	1.3.3
-Release:	10
+Release:	11
 License:	GPL v3+
 Group:		Applications/Multimedia
 #Source0Download: https://github.com/pragha-music-player/pragha/releases
