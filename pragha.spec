@@ -1,20 +1,22 @@
 #
 # Conditional build:
-%bcond_with	grilo	# playing on DLNA servers using grilo
-%bcond_with	rygel	# sharing on DLNA using rygel
+%bcond_without	grilo	# playing on DLNA servers using grilo
+%bcond_without	rygel	# sharing on DLNA using rygel
 %bcond_without	xfce	# session management support using libxfce4ui
 #
 Summary:	Lightweight GTK+ music manager
 Summary(pl.UTF-8):	Lekki zarządca muzyki oparty na GTK+
 Name:		pragha
-Version:	1.3.3
-Release:	11
+Version:	1.3.4
+Release:	1
 License:	GPL v3+
 Group:		Applications/Multimedia
 #Source0Download: https://github.com/pragha-music-player/pragha/releases
 Source0:	https://github.com/pragha-music-player/pragha/releases/download/v%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	eac512bcb42b000f5622e6abd867f5b2
+# Source0-md5:	a50b655e6f4a4a78ce9c08d54cf0a296
 URL:		https://github.com/pragha-music-player/pragha
+BuildRequires:	autoconf >= 2.50
+BuildRequires:	automake >= 1:1.8
 BuildRequires:	desktop-file-utils
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.36
@@ -24,14 +26,14 @@ BuildRequires:	gtk+3-devel >= 3.8.0
 BuildRequires:	intltool
 BuildRequires:	libpeas-devel >= 1.0.0
 BuildRequires:	libpeas-gtk-devel >= 1.0.0
+BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel >= 3.4
 BuildRequires:	taglib-devel >= 1.8
 # optional, for plugins
 BuildRequires:	glyr-devel >= 1.0.1
 %if %{with grilo}
-BuildRequires:	grilo-devel >= 0.2
-BuildRequires:	grilo-devel < 0.3
+BuildRequires:	grilo-devel >= 0.3.0
 %endif
 BuildRequires:	keybinder3-devel >= 0.2.0
 BuildRequires:	libcddb-devel >= 1.3.0
@@ -43,9 +45,8 @@ BuildRequires:	libnotify-devel >= 0.7.5
 BuildRequires:	libsoup-devel >= 2.38
 %{?with_xfce:BuildRequires:	libxfce4ui-devel >= 4.10.0}
 %if %{with rygel}
-# rygel-server-2.2
-BuildRequires:	rygel-devel >= 0.20.0
-BuildRequires:	rygel-devel < 0.26
+# rygel-server-2.6
+BuildRequires:	rygel-devel >= 0.26
 %endif
 BuildRequires:	totem-pl-parser-devel >= 2.26
 BuildRequires:	udev-glib-devel >= 1:145
@@ -105,10 +106,15 @@ Plik nagłówkowy do tworzenia wtyczek dla zarządcy muzyki Pragha.
 %setup -q
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
-	%{!?with_grilo:--disable-grilo-0.2} \
+	%{!?with_grilo:--disable-grilo-0.3} \
 	%{!?with_xfce:--disable-libxfce4ui} \
-	%{!?with_rygel:--disable-rygel-server-2.2} \
+	%{!?with_rygel:--disable-rygel-server-2.6} \
 	--disable-silent-rules
 %{__make}
 
