@@ -1,14 +1,14 @@
 #
 # Conditional build:
 %bcond_without	grilo	# playing on DLNA servers using grilo
-%bcond_without	rygel	# sharing on DLNA using rygel
+%bcond_with	rygel	# sharing on DLNA using rygel [API 2.6, i.e. 0.20.x-0.40.x]
 %bcond_without	xfce	# session management support using libxfce4ui
 #
 Summary:	Lightweight GTK+ music manager
 Summary(pl.UTF-8):	Lekki zarządca muzyki oparty na GTK+
 Name:		pragha
 Version:	1.3.4
-Release:	1
+Release:	2
 License:	GPL v3+
 Group:		Applications/Multimedia
 #Source0Download: https://github.com/pragha-music-player/pragha/releases
